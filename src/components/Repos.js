@@ -1,9 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GithubContext } from '../context/context';
+import calcLang from '../helpers/language'
 import { ExampleChart, Pie3D, Column3D, Bar3D, Doughnut2D } from './Charts';
 const Repos = () => {
-  return <h2>repos component</h2>;
+  const {repos} = React.useContext(GithubContext);
+  console.log(repos);
+
+  const {mostUsed,mostPopular,stars,forks} = calcLang(repos)
+
+  return <section className="section">
+    <Wrapper className="section-center">
+        {/* <ExampleChart data={chartData}/> */}
+        <Pie3D data={mostUsed}/>
+        <Column3D data={stars}/>
+          <Doughnut2D data={mostPopular}/>
+         <Bar3D data = {forks}/>
+    </Wrapper>  
+  </section>
 };
 
 const Wrapper = styled.div`
